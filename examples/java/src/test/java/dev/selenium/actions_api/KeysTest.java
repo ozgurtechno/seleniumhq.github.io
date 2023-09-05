@@ -9,6 +9,8 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import java.time.Duration;
+
 public class KeysTest extends BaseChromeTest {
     @Test
     public void keyDown() {
@@ -32,7 +34,7 @@ public class KeysTest extends BaseChromeTest {
                 .sendKeys("a")
                 .keyUp(Keys.SHIFT)
                 .sendKeys("b")
-                .perform();
+                .perform(); // Ab
 
         WebElement textField = driver.findElement(By.id("textInput"));
         Assertions.assertEquals("Ab", textField.getAttribute("value"));
@@ -77,8 +79,9 @@ public class KeysTest extends BaseChromeTest {
                 .sendKeys(Keys.ARROW_UP)
                 .keyUp(Keys.SHIFT)
                 .keyDown(cmdCtrl)
-                .sendKeys("xvv")
+                .sendKeys("xvv")  // copy paste
                 .keyUp(cmdCtrl)
+                .pause(Duration.ofSeconds(4))
                 .perform();
 
         Assertions.assertEquals("SeleniumSelenium!", textField.getAttribute("value"));
